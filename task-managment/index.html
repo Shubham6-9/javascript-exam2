@@ -16,16 +16,20 @@
         <button id="edit">Edit Task</button>
     </div>
     <div id="add-task-box">
-        <div style="display: flex; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-around; align-items: center;">
             <h2>Add New Task</h2>
-            <button>Close</button>
+            <button id="close">X</button>
         </div>
-        <form>
+        <form id="add-task-form">
+            <p id="title-err">Enter Title</p>
             <input type="text" id="title" placeholder="Title">
+            <p id="des-err">Enter Description</p>
             <input type="text" id="des" placeholder="Description">
-            <input type="text" id="due" placeholder="Due Date">
+            <p id="due-err">Enter Date</p>
+            <input type="date" id="due" placeholder="Due Date">
+            <input type="submit" value="submit">
         </form>
     </div>
 </body>
-
+<script src="script.js"></script>
 </html>
