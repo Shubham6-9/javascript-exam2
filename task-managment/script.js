@@ -100,8 +100,6 @@ document.getElementById("remove").addEventListener('click', () => {
     if (c == 0) {
         document.querySelectorAll(".del-btn").forEach((e) => {
             e.style.display = "block"
-        })
-        document.querySelectorAll(".del-btn").forEach((e) => {
             e.addEventListener('click', () => {
                 del(e.value)
             })
@@ -120,14 +118,12 @@ function del(delTaskTitle) {
     let newTasks = tasks.filter((e) => {
         return e.title != delTaskTitle
     })
-    // console.log(newTasks)
     localStorage.setItem("tasks", "")
     let a = 0
     newTasks.forEach((e) => {
-        e.num = a+1
+        e.num = a + 1
         a++
     })
     localStorage.setItem("tasks", JSON.stringify(newTasks))
-    // addTask(newTasks)
     document.getElementById("display").innerHTML = display();
 }
