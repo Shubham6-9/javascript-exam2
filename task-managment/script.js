@@ -9,6 +9,8 @@ let title = document.getElementById("title")
 let des = document.getElementById("des")
 let due = document.getElementById("due")
 let pri = document.getElementById("pri")
+
+// Add
 document.getElementById("add-task-form").addEventListener('submit', (e) => {
     e.preventDefault()
     if (title.value == "") {
@@ -90,4 +92,42 @@ function display() {
                     <button class="del-btn" value="${e.title}">Delete</button>
                 </div>`
     }).join('')
+}
+
+// Delete
+let c = 0
+document.getElementById("remove").addEventListener('click', () => {
+    if (c == 0) {
+        document.querySelectorAll(".del-btn").forEach((e) => {
+            e.style.display = "block"
+        })
+        document.querySelectorAll(".del-btn").forEach((e) => {
+            e.addEventListener('click', () => {
+                del(e.value)
+            })
+        })
+        c = 1
+    } else {
+        document.querySelectorAll(".del-btn").forEach((e) => {
+            e.style.display = "none"
+        })
+        c = 0
+    }
+})
+
+function del(delTaskTitle) {
+    let tasks = JSON.parse(localStorage.getItem("tasks"))
+    let newTasks = tasks.filter((e) => {
+        return e.title != delTaskTitle
+    })
+    // console.log(newTasks)
+    localStorage.setItem("tasks", "")
+    let a = 0
+    newTasks.forEach((e) => {
+        e.num = a+1
+        a++
+    })
+    localStorage.setItem("tasks", JSON.stringify(newTasks))
+    // addTask(newTasks)
+    document.getElementById("display").innerHTML = display();
 }
