@@ -85,31 +85,34 @@ function display() {
     return tasks.map((e) => {
         return `<div class="dis-box">
                     <h2 id="task-no">${e.num}</h2>
-                    <h4>${e.title}</h4>
+                    <h3>${e.title}</h3>
                     <p>${e.des}</p>
                     <p>${e.due}</p>
                     <p>${e.pri}</p>
-                    <button class="del-btn" value="${e.title}">Delete</button>
+                    <button class="del-btn" value="${e.title}"> X </button>
+                    <button class="edit-btn" value="${e.title}"> 🖉 </button>
                 </div>`
     }).join('')
 }
 
 // Delete
-let c = 0
+let d = 0
 document.getElementById("remove").addEventListener('click', () => {
-    if (c == 0) {
+    if (d == 0) {
+        d = 1
         document.querySelectorAll(".del-btn").forEach((e) => {
             e.style.display = "block"
+        })
+        document.querySelectorAll(".del-btn").forEach((e) => {
             e.addEventListener('click', () => {
                 del(e.value)
             })
         })
-        c = 1
     } else {
+        d = 0
         document.querySelectorAll(".del-btn").forEach((e) => {
             e.style.display = "none"
         })
-        c = 0
     }
 })
 
@@ -126,4 +129,29 @@ function del(delTaskTitle) {
     })
     localStorage.setItem("tasks", JSON.stringify(newTasks))
     document.getElementById("display").innerHTML = display();
+}
+
+// Edit
+let e = 0
+document.getElementById("edit").addEventListener('click', () => {
+    if (e == 0) {
+        e = 1
+        document.querySelectorAll(".edit-btn").forEach((e) => {
+            e.style.display = "block"
+        })
+        document.querySelectorAll(".edit-btn").forEach((e) => {
+            e.addEventListener('click', () => {
+                edit(e.value);
+            })
+        })
+    } else {
+        e = 0
+        document.querySelectorAll(".edit-btn").forEach((e) => {
+            e.style.display = "none"
+        })
+    }
+})
+
+function edit(editTaskTitle){
+    
 }

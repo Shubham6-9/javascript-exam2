@@ -83,19 +83,23 @@ h1 {
 }
 
 /* task display */
-#display{
-    padding: 20px;
+#display,
+#table-title {
+    padding: 0px 10px 0px 10px;
 }
-.dis-box{
+
+.dis-box {
     padding: 20px;
     border-radius: 5px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    text-align: center;
     margin: 5px 0px 5px 0px;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-.del-btn{
+
+.del-btn {
     background-color: red;
     color: white;
     padding: 8px;
@@ -104,9 +108,40 @@ h1 {
     font-weight: 600;
     display: none;
 }
-/* small mobile */
-@media (max-width: 321px){
-    #display{
-        font-size: 12px;
-    }
+
+/* sr no. */
+#task-no {
+    width: 5%;
+}
+
+/* title */
+.dis-box>h3 {
+    width: 8%;
+}
+
+/* description */
+.dis-box>p:nth-child(3) {
+    width: 20%;
+    text-align: left;
+    overflow-x: scroll;
+}
+
+/* due date */
+.dis-box>p:nth-child(4) {
+    width: 8%;
+}
+
+/* priority */
+.dis-box>p:nth-child(5) {
+    width: 5%;
+}
+
+.edit-btn{
+    background-color: rgb(241, 241, 12);
+    color: white;
+    padding: 8px;
+    border: 0px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: none;
 }

@@ -1,0 +1,82 @@
+/* small mobile */
+@media (max-width: 321px) {
+
+    #display,
+    #table-title {
+        font-size: 12px;
+    }
+
+    h1 {
+        font-size: 23px;
+    }
+
+    #actions>button {
+        font-size: 15px;
+    }
+
+    /* sr no. */
+    #task-no {
+        width: 12%;
+    }
+
+    /* title */
+    .dis-box>h3 {
+        width: 12%;
+    }
+
+    /* description */
+    .dis-box>p:nth-child(3) {
+        width: 30%;
+    }
+
+    .dis-box>p:nth-child(3)::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* due date */
+    .dis-box>p:nth-child(4) {
+        width: 18%;
+    }
+    
+    /* priority */
+    .dis-box>p:nth-child(5) {
+        width: 12%;
+    }
+
+}
+
+/* med and large mobile */
+@media (min-width: 321px) and (max-width: 426px) {
+    h1 {
+        font-size: 25px;
+    }
+
+    /* sr no. */
+    #task-no {
+        width: 12%;
+    }
+
+    /* title */
+    .dis-box>h3 {
+        width: 12%;
+    }
+
+    /* description */
+    .dis-box>p:nth-child(3) {
+        width: 30%;
+    }
+
+    .dis-box>p:nth-child(3)::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* due date */
+    .dis-box>p:nth-child(4) {
+        width: 18%;
+    }
+    
+    /* priority */
+    .dis-box>p:nth-child(5) {
+        width: 12%;
+    }
+}
