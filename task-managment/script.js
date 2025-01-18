@@ -1,7 +1,7 @@
 document.getElementById("add").addEventListener('click', () => {
     document.getElementById("add-task-box").style.display = "block"
 })
-document.getElementById("close").addEventListener('click', () => {
+document.getElementById("add-close").addEventListener('click', () => {
     document.getElementById("add-task-box").style.display = "none"
 })
 
@@ -9,7 +9,6 @@ let title = document.getElementById("title")
 let des = document.getElementById("des")
 let due = document.getElementById("due")
 let pri = document.getElementById("pri")
-
 // Add
 document.getElementById("add-task-form").addEventListener('submit', (e) => {
     e.preventDefault()
@@ -25,21 +24,57 @@ document.getElementById("add-task-form").addEventListener('submit', (e) => {
                 document.getElementById("due-err").style.display = "block"
             } else {
                 document.getElementById("due-err").style.display = "none"
-                if (pri == "") {
-                    document.getElementById("pri-err").style.display = "block"
-                } else {
-                    document.getElementById("pri-err").style.display = "none"
-                    if (pri.value.toLowerCase() == 'high' || pri.value.toLowerCase() == 'low' || pri.value.toLowerCase() == 'medium') {
-                        document.getElementById("pri-err2").style.display = "none"
-                        let tasks = JSON.parse(localStorage.getItem("tasks")) || []
-                        if (tasks == "") {
-                            addTask(tasks);
+                let currentDate = (new Date()).toLocaleDateString('en-GB').split("/")
+                let enteredDate = (due.value).split("-").reverse()
+                if (enteredDate[2] >= currentDate[2]) {
+                    document.getElementById("due-err2").style.display = "none"
+                    if (enteredDate[1] >= currentDate[1]) {
+                        document.getElementById("due-err2").style.display = "none"
+                        if (enteredDate[1] == currentDate[1]) {
+                            if (enteredDate[0] >= currentDate[0]) {
+                                if (pri.value == "") {
+                                    document.getElementById("pri-err").style.display = "block"
+                                } else {
+                                    document.getElementById("pri-err").style.display = "none"
+                                    if (pri.value.toLowerCase() == 'high' || pri.value.toLowerCase() == 'low' || pri.value.toLowerCase() == 'medium') {
+                                        document.getElementById("pri-err2").style.display = "none"
+                                        let tasks = JSON.parse(localStorage.getItem("tasks")) || []
+                                        if (tasks == "") {
+                                            addTask(tasks);
+                                        } else {
+                                            checkExistance(tasks);
+                                        }
+                                    } else {
+                                        document.getElementById("pri-err2").style.display = "block"
+                                    }
+                                }
+                            } else {
+                                document.getElementById("due-err2").style.display = "block"
+                            }
                         } else {
-                            checkExistance(tasks);
+                            if (pri == "") {
+                                document.getElementById("pri-err").style.display = "block"
+                            } else {
+                                document.getElementById("pri-err").style.display = "none"
+                                if (pri.value.toLowerCase() == 'high' || pri.value.toLowerCase() == 'low' || pri.value.toLowerCase() == 'medium') {
+                                    document.getElementById("pri-err2").style.display = "none"
+                                    let tasks = JSON.parse(localStorage.getItem("tasks")) || []
+                                    if (tasks == "") {
+                                        addTask(tasks);
+                                    } else {
+                                        checkExistance(tasks);
+                                    }
+                                } else {
+                                    document.getElementById("pri-err2").style.display = "block"
+                                }
+                            }
                         }
                     } else {
-                        document.getElementById("pri-err2").style.display = "block"
+                        document.getElementById("due-err2").style.display = "block"
                     }
+                } else {
+                    document.getElementById("due-err2").style.display = "block"
+
                 }
             }
         }
@@ -152,6 +187,16 @@ document.getElementById("edit").addEventListener('click', () => {
     }
 })
 
-function edit(editTaskTitle){
-    
+function edit(editTaskTitle) {
+    let tasks = JSON.parse(localStorage.getItem("tasks"))
+    document.getElementById("add-task-box").style.display = "block"
+    tasks.forEach((e) => {
+        if (e.title == editTaskTitle) {
+            title.value = `${e.title}`
+            des.value = `${e.des}`
+            due.value = `${e.due}`
+            pri.value = `${e.pri}`
+        }
+    })
+    del(editTaskTitle)
 }
